@@ -69,6 +69,20 @@ def showDirectedGraph(graph):
     plt.savefig("graph.png",dpi=300)
     plt.show()  # 添加这行代码来显示图像
 
+def showDirectedGraph_addfor_git(graph):
+    G = nx.DiGraph()
+
+    for word1 in graph:
+        for word2 in graph[word1]:
+            G.add_edge(word1, word2, weight=graph[word1][word2])
+
+    pos = nx.kamada_kawai_layout(G)
+    plt.figure(figsize=(12,8))
+    nx.draw_networkx(G, pos, with_labels=True, node_color='skyblue', edge_color='r', node_size=170, font_size=8)
+    nx.draw_networkx_edge_labels(G, pos, edge_labels=nx.get_edge_attributes(G, 'weight'))
+    plt.savefig("graph.png",dpi=300)
+    plt.show()  # 添加这行代码来显示图像
+
 
 
 def dijkstra(graph, start, end=None):
